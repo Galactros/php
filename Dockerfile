@@ -115,7 +115,7 @@ RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 		libcurl4-openssl-dev \
-		php-gd \
+		php7.0-gd \
 		libedit-dev \
 		libsodium-dev \
 		libsqlite3-dev \
