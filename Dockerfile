@@ -6,6 +6,10 @@
 
 FROM debian:stretch
 
+COPY source.list /etc/apt/source.list
+
+RUN  apt-get update && apt-get -y install php7.0-gd
+
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
@@ -269,10 +273,6 @@ RUN set -ex \
 # Override stop signal to stop process gracefully
 # https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
 STOPSIGNAL SIGQUIT
-
-COPY source.list /etc/apt/source.list
-
-RUN  apt-get update && apt-get -y install php7.0-gd
 
 EXPOSE 9000
 CMD ["php-fpm"]
