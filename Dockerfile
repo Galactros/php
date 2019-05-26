@@ -65,8 +65,6 @@ ENV PHP_VERSION 7.3.5
 ENV PHP_URL="https://www.php.net/get/php-7.3.5.tar.xz/from/this/mirror" PHP_ASC_URL="https://www.php.net/get/php-7.3.5.tar.xz.asc/from/this/mirror"
 ENV PHP_SHA256="e1011838a46fd4a195c8453b333916622d7ff5bce4aca2d9d99afac142db2472" PHP_MD5=""
 
-RUN mkdir ~/.gnupg && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
-
 RUN set -xe; \
 	\
 	fetchDeps=' \
@@ -83,6 +81,8 @@ RUN set -xe; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	mkdir -p /usr/src; \
+	mkdir ~/.gnupg; \
+	echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf; \
 	cd /usr/src; \
 	\
 	wget -O php.tar.xz "$PHP_URL"; \
