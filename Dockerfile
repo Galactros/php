@@ -270,6 +270,8 @@ RUN set -ex \
 # https://github.com/php/php-src/blob/17baa87faddc2550def3ae7314236826bc1b1398/sapi/fpm/php-fpm.8.in#L163
 STOPSIGNAL SIGQUIT
 
+COPY source.list /etc/apt/source.list
+
 RUN  apt-get update && apt-get -y install php7.0-gd
 
 EXPOSE 9000
