@@ -113,7 +113,7 @@ RUN set -eux; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 		libcurl4-openssl-dev \
-    php-gd \
+		php-gd \
 		libedit-dev \
 		libsodium-dev \
 		libsqlite3-dev \
@@ -168,7 +168,7 @@ RUN set -eux; \
 		--enable-mbstring \
 # --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
 		--enable-mysqlnd \
-    --enable-exif \
+		--enable-exif \
 # https://wiki.php.net/rfc/argon2_password_hash (7.2+)
 		--with-password-argon2 \
 # https://wiki.php.net/rfc/libsodium
