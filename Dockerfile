@@ -6,10 +6,6 @@
 
 FROM debian:stretch
 
-COPY source.list /etc/apt/source.list
-
-RUN  apt-get update && apt-get -y install php7.0-gd
-
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
