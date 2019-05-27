@@ -37,7 +37,8 @@ RUN apt-get update && apt-get install -y \
 		$PHPIZE_DEPS \
 		ca-certificates \
 		curl \
-		xz-utils
+		xz-utils \
+	--no-install-recommends && rm -r /var/lib/apt/lists/*
 
 ENV PHP_INI_DIR /usr/local/etc/php
 RUN set -eux; \
@@ -80,7 +81,8 @@ RUN set -xe; \
 		"; \
 	fi; \
 	apt-get update; \
-	apt-get install -y $fetchDeps; \
+	apt-get install -y --no-install-recommends $fetchDeps; \
+	rm -rf /var/lib/apt/lists/*; \
 	\
 	mkdir -p /usr/src; \
 	mkdir ~/.gnupg; \
@@ -105,7 +107,9 @@ RUN set -xe; \
 		gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 		command -v gpgconf > /dev/null && gpgconf --kill all; \
 		rm -rf "$GNUPGHOME"; \
-	fi;
+	fi; \
+	\
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $fetchDeps
 
 COPY docker-php-source /usr/local/bin/
 
@@ -113,7 +117,7 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y \
+	apt-get install -y --no-install-recommends \
 		libcurl4-openssl-dev \
 		libedit-dev \
 		libsodium-dev \
@@ -135,8 +139,9 @@ RUN set -eux; \
 		echo 'Pin-Priority: 990'; \
 	} > /etc/apt/preferences.d/argon2-buster; \
 	apt-get update; \
-	apt-get install -y libargon2-dev; \
+	apt-get install -y --no-install-recommends libargon2-dev; \
 ##</argon2>##
+	rm -rf /var/lib/apt/lists/*; \
 	\
 	export \
 		CFLAGS="$PHP_CFLAGS" \
