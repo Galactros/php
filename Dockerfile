@@ -37,8 +37,7 @@ RUN apt-get update && apt-get install -y \
 		$PHPIZE_DEPS \
 		ca-certificates \
 		curl \
-		xz-utils \
-	--no-install-recommends && rm -r /var/lib/apt/lists/*
+		xz-utils
 
 ENV PHP_INI_DIR /usr/local/etc/php
 RUN set -eux; \
@@ -81,8 +80,7 @@ RUN set -xe; \
 		"; \
 	fi; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends $fetchDeps; \
-	rm -rf /var/lib/apt/lists/*; \
+	apt-get install -y $fetchDeps; \
 	\
 	mkdir -p /usr/src; \
 	mkdir ~/.gnupg; \
@@ -109,7 +107,6 @@ RUN set -xe; \
 		rm -rf "$GNUPGHOME"; \
 	fi; \
 	\
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $fetchDeps
 
 COPY docker-php-source /usr/local/bin/
 
