@@ -1,4 +1,4 @@
-FROM 7.3.5-fpm
+FROM php:7.3.5-fpm
 RUN apt update && apt install -y --no-install-recommends \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
