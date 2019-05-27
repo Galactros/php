@@ -117,7 +117,7 @@ RUN set -eux; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends \
+	apt-get install -y \
 		libcurl4-openssl-dev \
 		libedit-dev \
 		libsodium-dev \
@@ -139,9 +139,8 @@ RUN set -eux; \
 		echo 'Pin-Priority: 990'; \
 	} > /etc/apt/preferences.d/argon2-buster; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends libargon2-dev; \
+	apt-get install -y libargon2-dev; \
 ##</argon2>##
-	rm -rf /var/lib/apt/lists/*; \
 	\
 	export \
 		CFLAGS="$PHP_CFLAGS" \
