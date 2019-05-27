@@ -105,8 +105,7 @@ RUN set -xe; \
 		gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 		command -v gpgconf > /dev/null && gpgconf --kill all; \
 		rm -rf "$GNUPGHOME"; \
-	fi; \
-	\
+	fi;
 
 COPY docker-php-source /usr/local/bin/
 
